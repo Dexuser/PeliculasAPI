@@ -8,3 +8,7 @@ el archivo principal del frontend es index.html
 
 En la misma carpeta (Web) hay un archivo JSON con dos peliculas, puede usar Postman o alguna otra herramienta
 para introducirlas via POST http://localhost:5203/Movies. Si no lo hace, vera el archivo index.html vacio.
+
+---
+
+![image](https://github.com/user-attachments/assets/39bec535-b2f0-4316-bb9d-32f419abc899)
