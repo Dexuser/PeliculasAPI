@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Editar una pelicula</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+    <h1>Editar una pelicula</h1>
+    <form>
+        <input class="boton-agregar-pelicula" type="button" value="Volver a la colección de peliculas" onclick="volverAIndex()">
+    </form>
+</header>
+
+<main id="movie-container">
+    <!-- Aquí se insertarán dinámicamente las tarjetas de películas -->
+</main>
+
+<footer>
+    <p>Esto es una página completamente legal!</p>
+</footer>
+
+<script>
+    // Cambia esta URL por la de tu propia API
+
+
+    const API_URL = "http://localhost:5203/Movies";
+    
+    function volverAIndex() {
+        window.location.href = `index.html`;
+    }
+    
+    function actualizar() {
+        const formEl = document.getElementById("form");
+        const formData =  new FormData(formEl);
+        const data = Object.fromEntries(formData);
+        
+        fetch(API_URL, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        });
+        
+        window.location.href = `index.html`;
+    }
+    async function cargarLaPelicula() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id'); // '122', por ejemplo
+
+
+            const respuesta = await fetch(API_URL + "/" + id);
+            console.log(API_URL + "/" + respuesta);
+            const pelicula = await respuesta.json();
+
+            const contenedor = document.getElementById("movie-container");
+
+
+            const tarjeta = document.createElement("div");
+            tarjeta.setAttribute("id", pelicula.id);
+            tarjeta.className = "tarjeta-pelicula-detalles"
+            // Behold, I'm going to hardCode this !
+            tarjeta.innerHTML = `
+            <img src="${pelicula.posterUrl}" alt="Portada de ${pelicula.titulo}">
+            <form id="form">
+            <input type="hidden" name="id" value="${id}"></input>
+            <p> <strong>Nombre: </strong> <input type="text" name="name" width="19" placeholder="${pelicula.name}"></p>
+            <p> <strong>Estreno: </strong> <input type="text" name="premiereYear" width="19" placeholder="${pelicula.premiereYear}"></p>
+            <p> <strong>Genero: </strong> <input type="text" name="genre" width="19" placeholder="${pelicula.genre}"></p>
+            <p> <strong>Director: </strong> <input type="text" name="director" width="19" placeholder="${pelicula.director}"></p>
+            <p> 
+                <strong>Calificacion: </strong>
+                <select name="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+            <p> <strong>PosterURL: </strong> <input type="text" name="posterUrl" width="5" placeholder="${pelicula.posterUrl}"></p>
+            <p> <strong>TrailerURL: </strong> <input type="text" name="oficialTrailerUrl" width="5" placeholder="${pelicula.oficialTrailerUrl}"></p>
+            <input class="tarjeta-boton-actualizarEdit" type="button" value="Actualizar" onclick="actualizar()"/>
+            </form>
+          `;
+
+            contenedor.appendChild(tarjeta);
+
+        } catch (error) {
+            console.error("Error al cargar las películas:", error);
+        }
+
+
+
+
+    }
+    
+    cargarLaPelicula();
+</script>
+</body>
+</html>

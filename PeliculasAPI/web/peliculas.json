@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Como entrenar a tu dragon",
+    "premiereYear": 2010,
+    "genre": "Aventura",
+    "director": "Dean DeBlois",
+    "rating": 5,
+    "posterUrl": "https://m.media-amazon.com/images/M/MV5BOTQ2M2I3ZTktNGE5NS00YmE3LTk1NDEtNzQzZTY3NTlmNTY3XkEyXkFqcGc@._V1_.jpg",
+    "oficialTrailerUrl": "https://www.youtube.com/watch?v=2AKsAxrhqgM"
+  },
+  {
+    "name": "Spider-Man: Un nuevo universo ",
+    "premiereYear": 2018,
+    "genre": "Comics",
+    "director": "Peter Ramsey",
+    "rating": 5,
+    "posterUrl": "https://m.media-amazon.com/images/M/MV5BOTNlZDY2NzktNDQwMS00ZWE4LWE3MmMtNGUzZTJhMmQ0NGI1XkEyXkFqcGc@._V1_FMjpg_UX1200_.jpg",
+    "oficialTrailerUrl": "https://www.youtube.com/watch?v=k-8ZFn1Askc"
+  }
+]

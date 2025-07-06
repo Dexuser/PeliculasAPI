@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Colección de Películas</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+    <h1>Colección de películas</h1>
+    <form>
+        <input class="boton-agregar-pelicula" type="button" value="Añadir una película" id="boton-agregar">
+    </form>
+</header>
+
+<main id="movie-container">
+    <!-- Las tarjetas de películas se insertan aquí -->
+</main>
+
+<footer>
+    <p>Usted puede hacer click en las tarjetas para ver su información.</p>
+    <p>
+        En la carpeta <b><i>Web</i></b> del proyecto hay un json con dos peliculas. Puede usar Postman o probar
+        la funcionalidad de agregar peliculas de la pagina usando dicha información.
+    </p>
+</footer>
+
+<script>
+    const API_URL = "http://localhost:5203/Movies";
+
+    // Redirigir a la página de agregar película
+    document.getElementById('boton-agregar').addEventListener('click', function (e) {
+        window.location.href = 'agregarPelicula.html';
+    });
+
+    async function cargarPeliculas() {
+        try {
+            const respuesta = await fetch(API_URL);
+            const peliculas = await respuesta.json();
+
+            const contenedor = document.getElementById("movie-container");
+            contenedor.innerHTML = ''; // Limpia antes de insertar
+
+            peliculas.forEach(pelicula => {
+                const tarjeta = document.createElement("div");
+                tarjeta.setAttribute("id", pelicula.id);
+                tarjeta.className = "tarjeta-pelicula";
+
+                tarjeta.innerHTML = `
+            <img src="${pelicula.posterUrl}" alt="Portada de ${pelicula.name}">
+            <h2 class="tarjeta-titulo">${pelicula.name}</h2>
+            <p><strong>Estreno: </strong>${pelicula.premiereYear}</p>
+            <p><strong>Género: </strong>${pelicula.genre}</p>
+            <p><strong>Director: </strong>${pelicula.director}</p>
+            <p><strong>Calificación: </strong>${pelicula.rating}</p>
+            <p><a href="${pelicula.oficialTrailerUrl}" target="_blank">Ver el trailer oficial</a></p>
+            <div class="botones">
+              <button class="tarjeta-boton-actualizar">Editar</button>
+              <button class="tarjeta-boton-eliminar">Eliminar</button>
+            </div>
+          `;
+
+                // Click en la tarjeta
+                tarjeta.addEventListener("click", function () {
+                    window.location.href = `descripcionPelicula.html?id=${pelicula.id}`;
+                });
+
+                // Click en el botón editar
+                const botonEditar = tarjeta.querySelector(".tarjeta-boton-actualizar");
+                botonEditar.addEventListener("click", function (e) {
+                    e.stopPropagation();
+                    window.location.href = `editarPelicula.html?id=${pelicula.id}`;
+                });
+
+                // Botón eliminar
+                const botonEliminar = tarjeta.querySelector(".tarjeta-boton-eliminar");
+                botonEliminar.addEventListener("click", async function (e) {
+                    e.stopPropagation();
+                    const confirmar = confirm("¿Estás seguro de que deseas eliminar esta película?");
+                    if (confirmar) {
+                        await fetch(`${API_URL}/${pelicula.id}`, { method: "DELETE" });
+                        window.location.reload(); 
+                    }
+                });
+
+                contenedor.appendChild(tarjeta);
+            });
+        } catch (error) {
+            console.error("Error al cargar las películas:", error);
+        }
+    }
+
+    cargarPeliculas();
+</script>
+</body>
+</html>

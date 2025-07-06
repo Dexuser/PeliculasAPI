@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Agregar una pelicula</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+    <h1>Agregar una pelicula</h1>
+    <form>
+        <input class="boton-agregar-pelicula" type="button" value="Volver a la colección de peliculas" onclick="volverAIndex()">
+    </form>
+</header>
+
+<main id="movie-container">
+    <!-- Aquí se insertarán dinámicamente las tarjetas de películas -->
+    <div class="tarjeta-pelicula">
+    <form id="form">
+        <p> <strong>Nombre: </strong> <input type="text" name="name" width="19"></p>
+        <p> <strong>Estreno: </strong> <input type="text" name="premiereYear" width="19"></p>
+        <p> <strong>Genero: </strong> <input type="text" name="genre" width="19"> </p>
+        <p> <strong>Director: </strong> <input type="text" name="director" width="19"> </p>
+        <p>
+            <strong>Calificacion: </strong>
+            <select name="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </p>
+        <p> <strong>PosterURL: </strong> <input type="text" name="posterUrl" width="5"></p>
+        <p> <strong>TrailerURL: </strong> <input type="text" name="oficialTrailerUrl" width="5"></p>
+        <input class="tarjeta-boton-actualizarEdit" type="button" value="Añadir" onclick="agregarPelicula()"/>
+    </form>
+    </div>
+    
+</main>
+
+<footer>
+    <p>El backend es mas sencillo que el frontEnd...</p>
+</footer>
+
+<script>
+    const API_URL = "http://localhost:5203/Movies";
+
+    function volverAIndex() {
+        window.location.href = `index.html`;
+    }
+    
+    async function agregarPelicula() {
+        const formEl = document.getElementById("form");
+        const formData =  new FormData(formEl);
+        const data = Object.fromEntries(formData);
+
+         await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+        window.location.href = `index.html`;
+    }
+</script>
+</body>
+</html>

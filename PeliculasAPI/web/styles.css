@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+header, footer {
+    background-color: #007BFF;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+main {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.tarjeta-pelicula-detalles {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 1rem;
+    overflow-wrap: break-word;
+}
+
+.tarjeta-pelicula-detalles img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+
+.tarjeta-pelicula {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 1rem;
+    cursor: pointer;
+    overflow-wrap: break-word;
+}
+
+.tarjeta-pelicula img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.tarjeta-titulo {
+    text-align: center;
+}
+
+
+.tarjeta-boton-actualizar {
+    background-color: #007BFF;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0.4rem;
+    
+}
+.tarjeta-boton-actualizar:hover {
+    background-color: #0270e4;
+}
+.tarjeta-boton-actualizar:active {
+    background-color: #0158b6;
+}
+
+
+.tarjeta-boton-eliminar {
+    background-color: #ef3048;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0.4rem;
+
+}
+.tarjeta-boton-eliminar:hover {
+    background-color: #c3283d;
+}
+.tarjeta-boton-eliminar:active {
+    background-color: #b32639;
+}
+
+
+
+/*Esto es para la pagina de editar exclusivamente, este se centra*/
+.tarjeta-boton-actualizarEdit {
+    background-color: #007BFF;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0.4rem;
+    display: block;
+    margin: 0 auto;
+}
+.tarjeta-boton-actualizarEdit:hover {
+    background-color: #0270e4;
+}
+.tarjeta-boton-actualizarEdit:active {
+    background-color: #0158b6;
+}
+
+.boton-agregar-pelicula {
+    background-color: #9a21f1;
+    color: white;
+    border: 1px solid #9a21f1;
+    border-radius: 3px;
+    padding: 0.4rem;
+}
+
+.boton-agregar-pelicula:hover {
+    background-color: #851dcf;
+}
+.boton-agregar-pelicula:active {
+    background-color: #6a17a5;
+}
